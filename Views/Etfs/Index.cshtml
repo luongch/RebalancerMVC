@@ -1,0 +1,71 @@
+﻿@model RebalancerMVC.Models.EtfViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+
+    <a asp-action="Create">Add ETF</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Etfs[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Etfs[0].Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Etfs[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Etfs[0].Percentage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var etf in Model.Etfs) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => etf.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => etf.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => etf.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => etf.Percentage)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@etf.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@etf.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<form asp-controller="Etfs" asp-action="Rebalance" method="get">
+    <p>
+        Cash: <input type="number" asp-for="Cash" />
+        @if(ViewBag.isValid == true)
+            {
+                <input class="btn btn-primary" type="submit" value="Rebalance" />
+            }
+        else
+            {
+                <input class="btn btn-primary" disabled type="submit" value="Rebalance" />
+            }
+        
+        
+        
+    </p>
+</form>
