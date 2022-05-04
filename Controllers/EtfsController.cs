@@ -117,7 +117,7 @@ namespace RebalancerMVC.Controllers
 
             var etf = await _context.Etf
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (etf != null)
+            if (etf == null)
             {
                 return NotFound();
             }
